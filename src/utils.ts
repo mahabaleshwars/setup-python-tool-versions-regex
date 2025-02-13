@@ -274,11 +274,11 @@ export function getPythonVersionFromToolFile(versionFile: string): string[] {
   if (fs.existsSync(toolVersionsFile)) {
     core.debug(`Found .tool-versions file`);
     const content = fs.readFileSync(toolVersionsFile, 'utf8');
-    
+
     // Debug the content of the file being read
-    core.debug('Content of .tool-versions file:'+ content);
+    core.debug('Content of .tool-versions file:' + content);
     core.debug(content);
-    
+
     return parseToolVersionsFile(content);
   } else {
     core.warning('.tool-versions file not found.');
@@ -299,11 +299,12 @@ export function parseToolVersionsFile(content: string): string[] {
   core.debug('Reading .tool-versions file content:');
   core.debug(content); // Debug the entire content of the file
   let pythonVersion: string | undefined;
-  const versionRegex = /^(?:python\s+)?v?(?<version>[^\s]+(?:[-\w]*\d+\.\d+\.\d+[-\w]*|>=\d+\.\d+\s*<\d+\.\d+))\s*$/m;
+  const versionRegex =
+    /^(?:python\s+)?v?(?<version>\d+\.\d+\.\d+(?:[-\w]*\d+\.\d+\.\d+[-\w]*|\s*-\s*\d+\.\d+\.\d+[-\w]*|>=\d+\.\d+\s*<\d+\.\d+|>=\d+\.\d+\s*<\d+\.\d+))\s*$/m;
   const found = content.match(versionRegex);
-core.debug('Found version from regex:'+ found);
+  core.debug('Found version from regex:' + found);
   pythonVersion = found?.groups?.version;
-  core.debug('Found version:'+ pythonVersion);
+  core.debug('Found version:' + pythonVersion);
   // In the case of an unknown format,
   // return as is and evaluate the version separately.
   if (!pythonVersion) {
@@ -319,10 +320,9 @@ core.debug('Found version from regex:'+ found);
 export function getVersionInputFromFile(versionFile: string): string[] {
   if (versionFile.endsWith('.toml')) {
     return getVersionInputFromTomlFile(versionFile);
-  }else if(versionFile == '.tool-versions') {
+  } else if (versionFile == '.tool-versions') {
     core.debug('Reading .tool-versions file');
-      return getPythonVersionFromToolFile(versionFile);
-    
+    return getPythonVersionFromToolFile(versionFile);
   } else {
     return getVersionInputFromPlainFile(versionFile);
   }

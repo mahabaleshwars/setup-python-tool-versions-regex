@@ -99387,11 +99387,8 @@ function findPyPyVersion(versionSpec, architecture, updateEnvironment, checkLate
         }
         ({ installDir, resolvedPythonVersion, resolvedPyPyVersion } = findPyPyToolCache(pypyVersionSpec.pythonVersion, pypyVersionSpec.pypyVersion, architecture));
         if (!installDir) {
-            ({
-                installDir,
-                resolvedPythonVersion,
-                resolvedPyPyVersion
-            } = yield pypyInstall.installPyPy(pypyVersionSpec.pypyVersion, pypyVersionSpec.pythonVersion, architecture, allowPreReleases, releases));
+            ({ installDir, resolvedPythonVersion, resolvedPyPyVersion } =
+                yield pypyInstall.installPyPy(pypyVersionSpec.pypyVersion, pypyVersionSpec.pythonVersion, architecture, allowPreReleases, releases));
         }
         const pipDir = utils_1.IS_WINDOWS ? 'Scripts' : 'bin';
         const _binDir = path.join(installDir, pipDir);
@@ -100702,7 +100699,7 @@ function parseToolVersionsFile(content) {
     core.debug('Reading .tool-versions file content:');
     core.debug(content); // Debug the entire content of the file
     let pythonVersion;
-    const versionRegex = /^(?:python\s+)?v?(?<version>[^\s]+(?:[-\w]*\d+\.\d+\.\d+[-\w]*|>=\d+\.\d+\s*<\d+\.\d+))\s*$/m;
+    const versionRegex = /^(?:python\s+)?v?(?<version>\d+\.\d+\.\d+(?:[-\w]*\d+\.\d+\.\d+[-\w]*|\s*-\s*\d+\.\d+\.\d+[-\w]*|>=\d+\.\d+\s*<\d+\.\d+|>=\d+\.\d+\s*<\d+\.\d+))\s*$/m;
     const found = content.match(versionRegex);
     core.debug('Found version from regex:' + found);
     pythonVersion = (_a = found === null || found === void 0 ? void 0 : found.groups) === null || _a === void 0 ? void 0 : _a.version;
