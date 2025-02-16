@@ -296,22 +296,24 @@ export function getVersionInputFromPlainFile(versionFile: string): string[] {
 }
 
 export function parseToolVersionsFile(content: string): string[] {
-  core.debug('Reading .tool-versions file content:');
-  core.debug(content); // Debug the entire content of the file
-  let pythonVersion: string | undefined;
-  const versionRegex =
-    '^pythons*v?(?:(?:pypyd+.d+(?:-d+.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:>=s*d+.d+(?:.d+)?(?:-w+)?(?:s*<s*d+.d+(?:.d+)?(?:-w+)?)?)|(?:d+.d+(?:.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:[a-zA-Z0-9-]+(?:.d+)?(?:-w+)?))s*$';
-  const found = content.match(versionRegex);
-  core.debug('Found version from regex:' + found);
-  pythonVersion = found?.groups?.version;
-  core.debug('Found version:' + pythonVersion);
-  // In the case of an unknown format,
-  // return as is and evaluate the version separately.
-  if (!pythonVersion) {
-    pythonVersion = content.trim();
-  }
+  // core.debug('Reading .tool-versions file content:');
+  // core.debug(content); // Debug the entire content of the file
+  // let pythonVersion: string | undefined;
+  // const versionRegex =
+  //   '^pythons*v?(?:(?:pypyd+.d+(?:-d+.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:>=s*d+.d+(?:.d+)?(?:-w+)?(?:s*<s*d+.d+(?:.d+)?(?:-w+)?)?)|(?:d+.d+(?:.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:[a-zA-Z0-9-]+(?:.d+)?(?:-w+)?))s*$';
+  // const found = content.match(versionRegex);
+  // core.debug('Found version from regex:' + found);
+  // pythonVersion = found?.groups?.version;
+  // core.debug('Found version:' + pythonVersion);
+  // // In the case of an unknown format,
+  // // return as is and evaluate the version separately.
+  // if (!pythonVersion) {
+  //   pythonVersion = content.trim();
+  // }
 
-  return [pythonVersion as string];
+  // return [pythonVersion as string];
+  core.info('tool version testing');
+  return [];
 }
 
 /**
