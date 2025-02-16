@@ -300,7 +300,7 @@ export function parseToolVersionsFile(content: string): string[] {
   core.debug(content); // Debug the entire content of the file
   let pythonVersion: string | undefined;
   const versionRegex =
-    /^(?:python\s+)?v?(?<version>\d+\.\d+\.\d+(?:[-\w]*\d+\.\d+\.\d+[-\w]*|\s*-\s*\d+\.\d+\.\d+[-\w]*|>=\d+\.\d+\s*<\d+\.\d+|>=\d+\.\d+\s*<\d+\.\d+))\s*$/m;
+    '^pythons*v?(?:(?:pypyd+.d+(?:-d+.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:>=s*d+.d+(?:.d+)?(?:-w+)?(?:s*<s*d+.d+(?:.d+)?(?:-w+)?)?)|(?:d+.d+(?:.d+)?(?:-w+)?(?:-v?d+(.d+)?(?:-w+)?)?)|(?:[a-zA-Z0-9-]+(?:.d+)?(?:-w+)?))s*$';
   const found = content.match(versionRegex);
   core.debug('Found version from regex:' + found);
   pythonVersion = found?.groups?.version;
